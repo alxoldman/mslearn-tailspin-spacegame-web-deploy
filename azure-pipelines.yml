@@ -68,7 +68,7 @@ stages:
   jobs:
   - deployment: Deploy
     pool:
-      vmimage: 'Ubintu-16.04'
+      vmimage: 'Ubuntu-16.04'
     environment: dev
     variables:
     - group: Release
