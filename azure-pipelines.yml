@@ -89,7 +89,7 @@ stages:
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
           artifactName: dropDacpac
-        condition: succededOrFailed()
+        condition: succeededOrFailed()
 
 - stage: DBAVerificationScript
   displayName: 'Script database schema changes'
