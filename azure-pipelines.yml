@@ -32,6 +32,7 @@ stages:
     - powershell: |
         cd $(PathInA)
         ls
+        $(PathInA)
     - task: CopyFiles@2
       inputs:
         SourceFolder: $(PathInA)
