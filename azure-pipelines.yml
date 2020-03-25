@@ -25,8 +25,8 @@ stages:
 - stage: B
   dependsOn: A
   variables:
-    PathInA: $[dependencies.A.outputs['a.power1.PathA']]
-    PathInAa: $[dependencies.A.outputs['a.power1.PathAa']]
+    PathInA: $[ dependencies.A.outputs['a.power1.PathA']]
+    PathInAa: $[ dependencies.A.outputs['a.power1.PathAa']]
   jobs:
   - job: b
     pool: Default
