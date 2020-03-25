@@ -8,11 +8,33 @@ trigger:
 
 pool: Default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages: 
+- stage: A
+  jobs:
+  - job: a
+    pool: Default
+    steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: inline
+        script: |
+          echo "##vso[task.setvariable variable=PathA]$(system.defaultworkingdirectory)"
+      name: power1
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- stage: B
+  dependsOn: A
+  variables:
+    PathInA: $[dependencies.A.outputs['a.power1.PathA']]
+  jobs:
+  - job: b
+    pool: Default
+    steps:
+    - powershell: |
+        cd $(PathInA)
+        ls
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: $(PathInA)
+        contents: '**'
+        TargetFolder: 'c:\test\copyfromoriginalfolder'
+        CleanTargetFolder: true
