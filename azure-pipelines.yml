@@ -18,8 +18,8 @@ stages:
       inputs:
         targetType: inline
         script: |
-          echo "##vso[task.setvariable variable=PathA]c:\temp"
-          echo "##vso[task.setvariable variable=PathAa]Test string"
+          echo "##vso[task.setvariable variable=PathA;isOutput=true]c:\temp"
+          echo "##vso[task.setvariable variable=PathAa;isOutput=true]Test string"
       name: power1
 
 - stage: B
