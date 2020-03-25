@@ -32,7 +32,7 @@ stages:
     - powershell: |
         cd $(PathInA)
         ls
-        $(PathInA)
+        Write-Host $(PathInA)
     - task: CopyFiles@2
       inputs:
         SourceFolder: $(PathInA)
