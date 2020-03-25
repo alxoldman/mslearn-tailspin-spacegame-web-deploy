@@ -19,12 +19,14 @@ stages:
         targetType: inline
         script: |
           echo "##vso[task.setvariable variable=PathA]$(system.defaultworkingdirectory)"
+          echo "##vso[task.setvariable variable=PathAa]'Test string'"
       name: power1
 
 - stage: B
   dependsOn: A
   variables:
     PathInA: $[dependencies.A.outputs['a.power1.PathA']]
+    PathInAa: $[dependencies.A.outputs['a.power1.PathAa']]
   jobs:
   - job: b
     pool: Default
@@ -32,7 +34,8 @@ stages:
     - powershell: |
         cd $(PathInA)
         ls
-        Write-Host 'The custom variable ' $(PathInA)
+        Write-Host 'The first custom variable ' $(PathInA)
+        Write-Host 'The second custom variable ' $(PathInAa)
         Write-Host 'The system variable ' $(system.defaultworkingdirectory)
     - task: CopyFiles@2
       inputs:
